@@ -1,2 +1,7 @@
+import RoomClass as RC
+
 print("Test")
-print("TEST2")
+
+GameRunner = RC.GameHandeler()
+ConRunner = RC.ConnectionHandeler()
+

@@ -28,10 +28,18 @@ class ConnectionHandeler():
 class GameHandeler():
     def __init__(self):
         self.RoomList = []
-        self.currentRoom = 0 #index of room in List of Rooms
+        self.currentRoom = 0 #index of room in List of ROoms
 
     def AddRoom(self, RoomName, RoomDescription):
         self.RoomList.append(Room(RoomName, RoomDescription))
 
     def MoveRoom(self):
         pass
+
+
+def RoomINIT():
+    pass#add all romms
+
+def ConnectionINIT():
+    pass#add all room Connections
+    
