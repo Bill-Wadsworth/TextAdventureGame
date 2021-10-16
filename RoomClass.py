@@ -15,7 +15,7 @@ class GameHandeler():
         self.Connections = []
 
     def PrintCurrentRoomInfo(self):
-        print("--", self.RoomList[self.currentRoom].name, "--")
+        print("\n--", self.RoomList[self.currentRoom].name, "--")
         print(self.RoomList[self.currentRoom].description)
 
     def AddRoom(self, Room):
@@ -28,9 +28,15 @@ class GameHandeler():
         self.ExitList = self.GetRoomExits()
         for exits in self.ExitList:
             if exits[1][0] == "-":
-                print("FLIP DIRECTION")
-            else:
-                print(exits[1]+": "+exits[0].name)
+                if exits[1] == "-north":
+                    exits[1] = "south"
+                if exits[1] == "-south":
+                    exits[1] = "north"
+                if exits[1] == "-east":
+                    exits[1] = "west"
+                if exits[1] == "-west":
+                    exits[1] = "east"
+            print(exits[1]+": "+exits[0].name)
     
     def GetRoomExits(self):
         self.Room = self.RoomList[self.currentRoom]
@@ -45,7 +51,15 @@ class GameHandeler():
         return exits
 
     def MoveRoom(self):
-        pass
+        validInput = False
+        while not validInput:
+            PlayerIn = input("Which direction do you want to go?\n").lower()
+            for exit in self.ExitList:
+                if PlayerIn == exit[1]:
+                    validInput = True
+                    self.currentRoom = self.RoomList.index(exit[0])
+            if not validInput:
+                print("you try really hard to go",PlayerIn,"but you cannot")
 
 
 def RoomsINIT(className):
@@ -56,7 +70,7 @@ def RoomsINIT(className):
     LivingRoom = Room("Living Room", "Your average living room but full of dead bodys, its not very living")
     className.AddRoom(LivingRoom)
 
-    className.addConnection(EntranceHall, DiningRoom, "North")
-    className.addConnection(EntranceHall, LivingRoom, "East")
+    className.addConnection(EntranceHall, DiningRoom, "north")
+    className.addConnection(EntranceHall, LivingRoom, "east")
     print("Rooms Created")
     

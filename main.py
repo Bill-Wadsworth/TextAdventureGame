@@ -8,6 +8,4 @@ while GameLoop:
 
     GameRunner.PrintCurrentRoomInfo()
     GameRunner.RoomExits()
-    move = input()
-
-
+    GameRunner.MoveRoom()
