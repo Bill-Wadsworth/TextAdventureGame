@@ -63,11 +63,11 @@ class GameHandeler():
 
 
 def RoomsINIT(className):
-    EntranceHall = Room("Entrance Hall", "A long dark hallway with a dim flickering light")
+    EntranceHall = Room("Entrance Hall", "A long dark hallway with a dim flickering light\n")
     className.AddRoom(EntranceHall)
-    DiningRoom = Room("Dining Room", "A large room with a olf wood table covered in moldy food")
+    DiningRoom = Room("Dining Room", "A large room with a old wood table covered in moldy food\n")
     className.AddRoom(DiningRoom)
-    LivingRoom = Room("Living Room", "Your average living room but full of dead bodys, its not very living")
+    LivingRoom = Room("Living Room", "Your average living room but full of dead bodys, its not very living\n")
     className.AddRoom(LivingRoom)
 
     className.addConnection(EntranceHall, DiningRoom, "north")

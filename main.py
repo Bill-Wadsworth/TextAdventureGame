@@ -1,4 +1,5 @@
 import RoomClass as RC
+import CharacterClass as CC
 
 GameRunner = RC.GameHandeler()
 RC.RoomsINIT(GameRunner)
