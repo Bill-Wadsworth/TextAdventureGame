@@ -1,7 +1,13 @@
 import RoomClass as RC
 
-print("Test")
-
 GameRunner = RC.GameHandeler()
-ConRunner = RC.ConnectionHandeler()
+RC.RoomsINIT(GameRunner)
+
+GameLoop = True
+while GameLoop:
+
+    GameRunner.PrintCurrentRoomInfo()
+    GameRunner.RoomExits()
+    move = input()
+
 

@@ -8,38 +8,55 @@ class Room():
     def GetRoomInfo(self):
         return self.description
 
-class ConnectionHandeler():
-    def __init__(self):
-        self.Connections = []
-
-    def addConnection(self, Room1, Room2, Direction):
-        self.Connections.append([Room1, Room2, Direction])
-    
-    def GetRoomExits(self, Room):
-        for Connection in self.Connections:
-            if Room in Connection:
-                if Room == Connection[0]:
-                    return Room, Connection[2]
-                else:
-                    FlippedSign = "-"+str(Connection[2])
-                    return Room, FlippedSign
-
-
 class GameHandeler():
     def __init__(self):
         self.RoomList = []
         self.currentRoom = 0 #index of room in List of ROoms
+        self.Connections = []
 
-    def AddRoom(self, RoomName, RoomDescription):
-        self.RoomList.append(Room(RoomName, RoomDescription))
+    def PrintCurrentRoomInfo(self):
+        print("--", self.RoomList[self.currentRoom].name, "--")
+        print(self.RoomList[self.currentRoom].description)
+
+    def AddRoom(self, Room):
+        self.RoomList.append(Room)
+
+    def addConnection(self, Room1, Room2, Direction):
+        self.Connections.append([Room1, Room2, Direction])
+
+    def RoomExits(self):
+        self.ExitList = self.GetRoomExits()
+        for exits in self.ExitList:
+            if exits[1][0] == "-":
+                print("FLIP DIRECTION")
+            else:
+                print(exits[1]+": "+exits[0].name)
+    
+    def GetRoomExits(self):
+        self.Room = self.RoomList[self.currentRoom]
+        exits = []
+        for Connection in self.Connections:
+            if self.Room in Connection:
+                if self.Room == Connection[0]:
+                    exits.append([Connection[1], Connection[2]])
+                else:
+                    FlippedSign = "-"+str(Connection[2])
+                    exits.append([Connection[0], FlippedSign])
+        return exits
 
     def MoveRoom(self):
         pass
 
 
-def RoomINIT():
-    pass#add all romms
+def RoomsINIT(className):
+    EntranceHall = Room("Entrance Hall", "A long dark hallway with a dim flickering light")
+    className.AddRoom(EntranceHall)
+    DiningRoom = Room("Dining Room", "A large room with a olf wood table covered in moldy food")
+    className.AddRoom(DiningRoom)
+    LivingRoom = Room("Living Room", "Your average living room but full of dead bodys, its not very living")
+    className.AddRoom(LivingRoom)
 
-def ConnectionINIT():
-    pass#add all room Connections
+    className.addConnection(EntranceHall, DiningRoom, "North")
+    className.addConnection(EntranceHall, LivingRoom, "East")
+    print("Rooms Created")
     
