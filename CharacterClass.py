@@ -37,27 +37,30 @@ class Merchant(NPC):
         self.soldWeapon = ""
         self.HealRate = random.randint(0,5)
         self.soldItems = IC.WeaponFactory()
+        self.SaleRate = 0
     
     def BuyItems(self):
         pass
     
     def SellAnItem(self):
-        self.sale = random.randint(0,3)
+        self.sale = random.randint(1,2)
         if self.sale == 0: #No Sale
             self.setDialouge("I am not selling anything right now, come back later")
         if self.sale == 1: #Sell Heal
             self.setDialouge("Here traveler i have a med kit but it will cost you 5 gold\n[y/n]: ")
+            self.SaleRate = 5
         if self.sale == 2: #Sell Weapon
             self.setDialouge("I found this weapon and i will sell it to you for a small price of 7 gold\n[y/n]: ")
+            self.SaleRate = 7
     
     def SaleOption(self, playerClass):
         self.SellAnItem()
         self.speak()
         if self.sale != 0:
             option = input().lower()
-            if option == "y" and playerClass.wealth >= self.saleCost:
+            if option == "y" and playerClass.wealth >= self.SaleRate:
                 if self.sale == 1:
-                    playerClass.health += self.HealRate
+                    playerClass.Health += self.HealRate
                     print("You where healed by", self.HealRate)
                 elif self.sale == 2:
                     playerClass.Inventory.append(self.soldWeapon)

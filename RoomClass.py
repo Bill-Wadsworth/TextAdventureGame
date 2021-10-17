@@ -13,6 +13,22 @@ class Room():
         return self.name
     def GetRoomInfo(self):
         return self.description
+    
+    def GetInhabitants(self):
+        for i in range(0, len(self.Inhabitants)):
+            print(i,":",self.Inhabitants[i].name)
+        
+        ValidNumber = False
+        while not ValidNumber:
+            UserIn = input()
+            ValidNumber = UserIn.isdigit()
+            if not ValidNumber:
+                print("Must be a number, try again")
+        
+        from main import Player
+        chosenPerson = int(UserIn)%len(self.Inhabitants)
+        self.Inhabitants[chosenPerson].SaleOption(Player)
+        
 
 class GameHandeler():
     def __init__(self):
@@ -42,8 +58,7 @@ class GameHandeler():
             self.RoomExits()
             self.MoveRoom()
         elif self.WhatImDoin == "i":
-            print("This has not been implimented yet :/")
-            pass 
+            self.RoomList[self.currentRoom].GetInhabitants()
 
     def RoomExits(self):
         self.ExitList = self.GetRoomExits()
