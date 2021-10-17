@@ -1,7 +1,13 @@
+import CharacterClass as CC
+
 class Room():
     def __init__(self, Name, Description):
         self.name = Name
         self.description = Description
+        self.Inhabitants = []
+        
+    def AddNewInhabitant(self, NewPerson):
+        self.Inhabitants.append(NewPerson)
 
     def GetRoomName(self):
         return self.name
@@ -17,12 +23,27 @@ class GameHandeler():
     def PrintCurrentRoomInfo(self):
         print("\n--", self.RoomList[self.currentRoom].name, "--")
         print(self.RoomList[self.currentRoom].description)
+        if len(self.RoomList[self.currentRoom].Inhabitants) != 0:
+            print("Their are", len(self.RoomList[self.currentRoom].Inhabitants),"inhabitans in the room")
+        print("")
 
     def AddRoom(self, Room):
         self.RoomList.append(Room)
 
     def addConnection(self, Room1, Room2, Direction):
         self.Connections.append([Room1, Room2, Direction])
+
+    def WhatUDoin(self):
+        if len(self.RoomList[self.currentRoom].Inhabitants) != 0:
+            print("press (i) to talk to people in the room")
+        print("Press (m) to move room")
+        self.WhatImDoin = input().lower()
+        if self.WhatImDoin == "m":
+            self.RoomExits()
+            self.MoveRoom()
+        elif self.WhatImDoin == "i":
+            print("This has not been implimented yet :/")
+            pass 
 
     def RoomExits(self):
         self.ExitList = self.GetRoomExits()
@@ -64,6 +85,8 @@ class GameHandeler():
 
 def RoomsINIT(className):
     EntranceHall = Room("Entrance Hall", "A long dark hallway with a dim flickering light\n")
+    StarterMerchant = CC.Merchant("Jhon")
+    EntranceHall.AddNewInhabitant(StarterMerchant)
     className.AddRoom(EntranceHall)
     DiningRoom = Room("Dining Room", "A large room with a old wood table covered in moldy food\n")
     className.AddRoom(DiningRoom)
