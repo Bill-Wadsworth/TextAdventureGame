@@ -1,4 +1,5 @@
 import CharacterClass as CC
+import random
 
 class Room():
     def __init__(self, Name, Description):
@@ -35,6 +36,7 @@ class GameHandeler():
         self.RoomList = []
         self.currentRoom = 0 #index of room in List of ROoms
         self.Connections = []
+        self.incounterPercentage = 50 #how often in % do you get attacked
 
     def PrintCurrentRoomInfo(self):
         print("\n--", self.RoomList[self.currentRoom].name, "--")
@@ -57,6 +59,7 @@ class GameHandeler():
         if self.WhatImDoin == "m":
             self.RoomExits()
             self.MoveRoom()
+            self.GenorateEncounter()
         elif self.WhatImDoin == "i":
             self.RoomList[self.currentRoom].GetInhabitants()
 
@@ -87,6 +90,7 @@ class GameHandeler():
         return exits
 
     def MoveRoom(self):
+
         validInput = False
         while not validInput:
             PlayerIn = input("Which direction do you want to go?\n").lower()
@@ -96,6 +100,13 @@ class GameHandeler():
                     self.currentRoom = self.RoomList.index(exit[0])
             if not validInput:
                 print("you try really hard to go",PlayerIn,"but you cannot")
+    
+    def GenorateEncounter(self):
+        attackedNum = random.randint(0,100)
+        if attackedNum > self.incounterPercentage:
+            Enemy = CC.CreateEnemy()
+            print("you where attacked by",Enemy.name)
+
 
 
 def RoomsINIT(className):

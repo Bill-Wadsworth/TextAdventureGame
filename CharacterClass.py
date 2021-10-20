@@ -24,12 +24,18 @@ class NPC():
 
 class Enemy(NPC):
     def __init__(self, Name):
-        super.__init__(Name)
+        super().__init__(Name)
         self.Health = random.randint(1, 10)
         self.Damage = random.randint(1, 3)
     
     def Attack(self):
         pass
+
+def CreateEnemy():
+    names = ["Bob", "A Zombie", "Jhon the starter Merchant", "a very angry mouse", "Pizza huts extra large peporoni pizza","Tom Coatham", "Thomas JacketGammon"]
+    enemysNameIndex = random.randint(0,len(names))
+    TheEnemy = Enemy(names[enemysNameIndex])
+    return TheEnemy
     
 class Merchant(NPC):
     def __init__(self, Name):

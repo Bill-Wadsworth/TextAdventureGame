@@ -12,5 +12,3 @@ while GameLoop:
 
     GameRunner.PrintCurrentRoomInfo()
     GameRunner.WhatUDoin()
-    #GameRunner.RoomExits()
-    #GameRunner.MoveRoom()
